@@ -10,21 +10,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Exécuter une action
-        uses: actions/hello-world-docker-action@v1
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Listing files
-        run: ls -al
       - name: Setup PHP Action
         uses: shivammathur/setup-php@2.27.1
         with:
           php-version: '8.2'
           tools: php-cs-fixer, phpstan
       - name: Install Composer and Dependencies
-        run: |
-              # Télécharger et installer Composer localement
-               curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=compose
-               composer install
+        run: composer install
       - name: Run tests
         run: ./vendor/bin/phpunit
+      - name: Phpstan
+        run: phpstan analyse src tests --level max
+      - name: cs fixer
+        run: php-cs-fixer --dry-run
