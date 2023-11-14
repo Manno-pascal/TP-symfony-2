@@ -18,6 +18,9 @@ jobs:
         run: ls -al
       - name: Setup PHP Action
         uses: shivammathur/setup-php@2.27.1
+        with:
+          php-version: '8.2'
+          tools: php-cs-fixer, phpstan
       - name: Install Composer and Dependencies
         run: |
               # Télécharger et installer Composer localement
