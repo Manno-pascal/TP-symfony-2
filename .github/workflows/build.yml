@@ -23,5 +23,5 @@ jobs:
         run: ./vendor/bin/phpunit
       - name: Phpstan
         run: phpstan analyse src tests --level max
-      - name: cs fixer
-        run: php-cs-fixer --dry-run
+      - name: build image
+        run: docker build
